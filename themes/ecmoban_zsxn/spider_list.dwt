@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>spider_list</title>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function(){
+	var spiderListTitle = $("#spiderListTitle0").val();
+	var spiderListTitle_img = $("#spiderListTitle1").val();
+	var title_head = $("#spiderListTitle2").val();
+	var title_foot = $("#spiderListTitle3").val();
+	var title_replace = $("#spiderListTitle4").val();
+	var keywords_head = $("#spiderListTitle5").val();
+	var keywords_foot = $("#spiderListTitle6").val();
+	var keywords_replace = $("#spiderListTitle7").val();
+	var description_head = $("#spiderListTitle8").val();
+	var description_foot = $("#spiderListTitle9").val();
+	var description_replace = $("#spiderListTitle10").val();
+	var content_head = $("#spiderListTitle11").val();
+	var content_foot = $("#spiderListTitle12").val();
+	var content_replace = $("#spiderListTitle13").val();
+	var cat_id = $("#spiderListTitle14").val();
+	var image_name = $("#spiderListTitle15").val();
+	var is_siteurl = $("#spiderListTitle16").val();
+	var is_siteurl_str = $("#spiderListTitle17").val();
+	var detail = "";
+	var detail_img = "";
+	$("#spiderListId "+spiderListTitle).each(function(i){
+		if(i==0){
+			detail += $(this).attr("href");
+		}else{
+			detail += "###" + $(this).attr("href");
+		}
+	});
+	$("#spiderListId "+spiderListTitle_img).each(function(i){
+		if(i==0){
+			detail_img += $(this).attr("src");
+		}else{
+			detail_img += "###" + $(this).attr("src");
+		}
+	});
+	$.ajax({
+		url : "spider.php",
+		data : "detail="+detail+"&title_head="+title_head+"&title_foot="+title_foot+"&title_replace="+title_replace+"&keywords_head="+keywords_head+"&keywords_foot="+keywords_foot+"&keywords_replace="+keywords_replace+"&description_head="+description_head+"&description_foot="+description_foot+"&description_replace="+description_replace+"&content_head="+content_head+"&content_foot="+content_foot+"&content_replace="+content_replace+"&cat_id="+cat_id+"&image_name="+image_name+"&detail_img="+detail_img+"&is_siteurl="+is_siteurl+"&is_siteurl_str="+is_siteurl_str,
+		type : "post",
+		success(res){
+			if(res){
+				var arr = JSON.parse(res);
+				alert(arr);
+			}
+		}
+	});
+});
+</script>
+</head>
+<body>
+<input type="hidden" value='{$list_title}' id="spiderListTitle0" />
+<input type="hidden" value='{$list_title_img}' id="spiderListTitle1" />
+<input type="hidden" value='{$title_head}' id="spiderListTitle2" />
+<input type="hidden" value='{$title_foot}' id="spiderListTitle3" />
+<input type="hidden" value='{$title_replace}' id="spiderListTitle4" />
+<input type="hidden" value='{$keywords_head}' id="spiderListTitle5" />
+<input type="hidden" value='{$keywords_foot}' id="spiderListTitle6" />
+<input type="hidden" value='{$keywords_replace}' id="spiderListTitle7" />
+<input type="hidden" value='{$description_head}' id="spiderListTitle8" />
+<input type="hidden" value='{$description_foot}' id="spiderListTitle9" />
+<input type="hidden" value='{$description_replace}' id="spiderListTitle10" />
+<input type="hidden" value='{$content_head}' id="spiderListTitle11" />
+<input type="hidden" value='{$content_foot}' id="spiderListTitle12" />
+<input type="hidden" value='{$content_replace}' id="spiderListTitle13" />
+<input type="hidden" value='{$cat_id}' id="spiderListTitle14" />
+<input type="hidden" value='{$image_name}' id="spiderListTitle15" />
+<input type="hidden" value='{$is_siteurl}' id="spiderListTitle16" />
+<input type="hidden" value='{$is_siteurl_str}' id="spiderListTitle17" />
+<div id="spiderListId">
+	{$curl_list}
+</div>
+</body>
+</html>

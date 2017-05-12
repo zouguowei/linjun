@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>spider</title>
+<style>
+.spiderContent{
+	width:600px;
+	margin:50px auto;
+}
+.spiderContent span{
+	display:block;
+	float:left;
+}
+.spiderContent p{
+	height: 30px;
+    margin: 10px;
+    width: 600px;
+    line-height: 30px;
+}
+.spiderContent input[type="text"]{
+	width:400px;
+	height:30px;
+}
+.spiderContent select{
+	width:406px;
+	height:38px;
+	margin-top:-5px;
+}
+.spiderContent .span-left{
+	text-align:right;
+	width:160px;
+}
+.spiderContent .span-right{
+	width:400px;
+}
+.spiderContent .stitle{
+	text-align:center;
+}
+.spiderContent .spiderbtn{
+	float: right;margin-right: 50px;margin-top:15px;cursor: pointer;width: 80px;height: 30px;background: #ddd;border: none; border-radius: 2px;
+}
+</style>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<div class="spiderContent">
+	<div class="stitle"><h3>站点抓取</h3></div>
+	<form method="post" action="spider.php">
+		<p>
+			<span class="span-left">选择站点：</span>
+			<span class="span-right">
+				<select onchange="changeSite(this);">
+					<option>请选择</option>
+					<!--{foreach from=$formdata item=data}-->
+					<option value="{$data.site_name}">{$data.site_name}</option>
+					<!--{/foreach}-->
+				</select>
+			</span>
+		</p>
+		<p><span class="span-left">站点名称：</span><span class="span-right"><input type="text" value='' name="site_name" id="site_name" /></span></p>
+		<p><span class="span-left">是否指定网站域名：</span><span class="span-right">否<input type="radio" value='0' name="is_siteurl" />&nbsp;是<input type="radio" value='1' name="is_siteurl" /></span></p>
+		<p><span class="span-left">网站域名：</span><span class="span-right"><input type="text" value='' name="is_siteurl_str" id="is_siteurl_str" /></span></p>
+		<p><span class="span-left">列表地址头：</span><span class="span-right"><input type="text" value='' name="site_url_head" id="site_url_head" /></span></p>
+		<p><span class="span-left">列表地址尾：</span><span class="span-right"><input type="text" value='' name="site_url_foot" id="site_url_foot" /></span></p>
+		<p><span class="span-left">分页总数：</span><span class="span-right"><input type="text" value='' name="pagesize" id="pagesize" /></span></p>
+		<p><span class="span-left">列表截取头：</span><span class="span-right"><input type="text" value='' name="list_head" id="list_head" /></span></p>
+		<p><span class="span-left">列表截取尾：</span><span class="span-right"><input type="text" value='' name="list_foot" id="list_foot" /></span></p>
+		<p><span class="span-left">列表URL选择器：</span><span class="span-right"><input type="text" value='' name="list_title" id="list_title" /></span></p>
+		<p><span class="span-left">列表IMG选择器：</span><span class="span-right"><input type="text" value='' name="list_title_img" id="list_title_img" /></span></p>
+		<p><span class="span-left">文章标题头：</span><span class="span-right"><input type="text" value='' name="title_head" id="title_head" /></span></p>
+		<p><span class="span-left">文章标题尾：</span><span class="span-right"><input type="text" value='' name="title_foot" id="title_foot" /></span></p>
+		<p><span class="span-left">文章标题替换：</span><span class="span-right"><input type="text" value='' name="title_replace" id="title_replace" /></span></p>
+		<p><span class="span-left">文章关键字头：</span><span class="span-right"><input type="text" value='' name="keywords_head" id="keywords_head" /></span></p>
+		<p><span class="span-left">文章关键字尾：</span><span class="span-right"><input type="text" value='' name="keywords_foot" id="keywords_foot" /></span></p>
+		<p><span class="span-left">文章关键字替换：</span><span class="span-right"><input type="text" value='' name="keywords_replace" id="keywords_replace" /></span></p>
+		<p><span class="span-left">文章描述头：</span><span class="span-right"><input type="text" value='' name="description_head" id="description_head" /></span></p>
+		<p><span class="span-left">文章描述尾：</span><span class="span-right"><input type="text" value='' name="description_foot" id="description_foot" /></span></p>
+		<p><span class="span-left">文章描述替换：</span><span class="span-right"><input type="text" value='' name="description_replace" id="description_replace" /></span></p>
+		<p><span class="span-left">文章内容头：</span><span class="span-right"><input type="text" value='' name="content_head" id="content_head" /></span></p>
+		<p><span class="span-left">文章内容尾：</span><span class="span-right"><input type="text" value='' name="content_foot" id="content_foot" /></span></p>
+		<p><span class="span-left">文章内容替换：</span><span class="span-right"><input type="text" value='' name="content_replace" id="content_replace" /></span></p>
+		<p><span class="span-left">文章分类ID：</span><span class="span-right"><input type="text" value='' name="cat_id" id="cat_id" /></span></p>
+		<p><span class="span-left">图片文件夹名：</span><span class="span-right"><input type="text" value='' name="image_name" id="image_name" /></span></p>
+		<p><input type="submit" value="提交" class="spiderbtn" /></p>
+	</form>
+</div>
+<script type="text/javascript">
+function changeSite(e){
+	var ids = $(e).val();
+	$.ajax({
+		url : "spider.php",
+		data : "id="+ids,
+		type : "post",
+		success(res){
+			var arr = JSON.parse(res);
+			if(arr.length>0){
+				$("#site_name").val(arr[0].site_name);
+				$("#site_url_head").val(arr[0].site_url_head);
+				$("#site_url_foot").val(arr[0].site_url_foot);
+				$("#pagesize").val(arr[0].pagesize);
+				$("#list_head").val(arr[0].list_head);
+				$("#list_foot").val(arr[0].list_foot);
+				$("#list_title").val(arr[0].list_title);
+				$("#list_title_img").val(arr[0].list_title_img);
+				$("#title_head").val(arr[0].title_head);
+				$("#title_foot").val(arr[0].title_foot);
+				$("#title_replace").val(arr[0].title_replace);
+				$("#keywords_head").val(arr[0].keywords_head);
+				$("#keywords_foot").val(arr[0].keywords_foot);
+				$("#keywords_replace").val(arr[0].keywords_replace);
+				$("#description_head").val(arr[0].description_head);
+				$("#description_foot").val(arr[0].description_foot);
+				$("#description_replace").val(arr[0].description_replace);
+				$("#content_head").val(arr[0].content_head);
+				$("#content_foot").val(arr[0].content_foot);
+				$("#content_replace").val(arr[0].content_replace);
+				$("#cat_id").val(arr[0].cat_id);
+				$("#image_name").val(arr[0].image_name);
+				if(arr[0].is_siteurl == 1){
+					$("input[@type=radio][name=is_siteurl][@value=1]").attr("checked",true);
+				}else{
+					$("input[@type=radio][name=is_siteurl][@value=0]").attr("checked",true);
+				}
+				$("#is_siteurl_str").val(arr[0].is_siteurl_str);
+			}else{
+				$(".spiderContent input").val("");
+				$(".spiderbtn").val("提交");
+			}
+		}
+	});
+}
+</script>
+</body>
+</html>

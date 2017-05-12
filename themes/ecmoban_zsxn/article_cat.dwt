@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+
+<div class="block clearfix">
+  <!--left start-->
+  <div class="AreaL">
+	<div class="content_left clearfix">
+	  <div class="content_left_top clearfix">
+		 <ul class="clearfix">
+		   <!--{foreach from=$artciles_list key=key item=article}-->
+		   <li>
+				<div><a href="{$article.url}"><img src="{$article.file_url}" border="0" class="B_blue"/></a></div>
+				<div class="content_left_pright">
+					<p><a href="{$article.url}" title="{$article.title|escape:html}" style="font-weight:bold;">{$article.title}</a></p>
+					<p>{$article.content|truncate:190:"...":true}</p>
+					<p class="content_left_pright_p">{$article.add_time}</p>
+				</div>
+			</li>
+		   <!--{/foreach}-->
+		   </ul>
+	   </div>
+	</div>
+  <div class="blank5"></div>
+  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+  </div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+	<!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem -->
+	<div class="content_right clearfix">
+	<h3><span>软件技术</span></h3>
+	  <div class="content_right_top clearfix">
+		 <ul class="clearfix">
+		   <!--{foreach from=$new_articles_13 key=key item=article}-->
+		   <li>
+				<div><a href="{$article.url}"><img src="{$article.file_url}" border="0" class="B_blue"/></a></div>
+				<div class="content_right_pright">
+					<p><a href="{$article.url}" title="{$article.title|escape:html}" style="font-weight:bold;">{$article.title}</a></p>
+					<p>{$article.content|truncate:30:"...":true}</p>
+					<p class="ptime">{$article.add_time}</p>
+				</div>
+			</li>
+		   <!--{/foreach}-->
+		   </ul>
+	   </div>
+	 </div>
+	<div class="blank"></div>
+	<div class="content_right clearfix">
+	<h3><span>硬件技术</span></h3>
+	  <div class="content_right_top clearfix">
+		 <ul class="clearfix">
+		   <!--{foreach from=$new_articles_14 key=key item=article}-->
+		   <li>
+				<div><a href="{$article.url}"><img src="{$article.file_url}" border="0" class="B_blue"/></a></div>
+				<div class="content_right_pright">
+					<p><a href="{$article.url}" title="{$article.title|escape:html}" style="font-weight:bold;">{$article.title}</a></p>
+					<p>{$article.content|truncate:30:"...":true}</p>
+					<p class="ptime">{$article.add_time}</p>
+				</div>
+			</li>
+		   <!--{/foreach}-->
+		   </ul>
+	   </div>
+	</div>
+	<!-- #BeginLibraryItem "/library/left_help.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+	<!-- TemplateEndEditable -->
+    <!--AD end-->
+    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+  </div>  
+  <!--right end-->
+</div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+document.getElementById('cur_url').value = window.location.href;
+</script>
+</html>

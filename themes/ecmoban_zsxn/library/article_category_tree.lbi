@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $article_categories} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.article_cat}</span></h3>
+  <div class="boxCenterList RelaArticle">
+    <!--{foreach from=$article_categories item=cat}-->
+    <div class="RelaArticle_head"><a href="{$cat.url}">{$cat.name|escape:html}</a></div>
+    <div class="RelaArticle_child">
+      <!--{foreach from=$cat.children item=child}-->
+      <a href="{$child.url}" style="background-image:none;">{$child.name|escape:html}</a>
+      <!--{/foreach}-->
+    </div>
+    <!--{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
